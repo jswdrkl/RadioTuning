@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>रेडियो स्टेशनचे ट्यूनिंग आणि मानसिक स्वास्थ्य</title>
+  
+  <!-- IBM Plex Sans फॉन्ट (आणि देवनागरी लिपीसाठी पूरक) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fdfdfd;
+      --text-color: #1f2328;
+      --card-bg: #ffffff;
+      --border-color: #e1e4e8;
+      --accent-color: #0969da;
+      --toggle-bg: #eaeef2;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0d1117;
+      --text-color: #e6edf3;
+      --card-bg: #161b22;
+      --border-color: #30363d;
+      --accent-color: #58a6ff;
+      --toggle-bg: #21262d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'IBM Plex Sans Devanagari', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.8;
+      padding: 20px 15px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 30px 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    /* हेडर आणि थीम टॉगल */
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    /* मुख्य शीर्षक */
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 20px;
+      color: var(--text-color);
+      text-align: left;
+    }
+
+    /* मल्टीकलर SVG ग्राफिक */
+    .visual-wrapper {
+      width: 100%;
+      margin: 20px 0 30px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .visual-wrapper svg {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* मजकूर फॉरमॅटिंग व जस्टिफिकेशन (शब्द तुटणे टाळण्यासाठी) */
+    .content-body p {
+      font-size: 1rem;
+      margin-bottom: 1.35rem;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: none;
+      -webkit-hyphens: none;
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+
+    .content-body em {
+      font-style: italic;
+    }
+
+    .sign-off {
+      margin-top: 25px;
+      font-size: 0.95rem;
+      color: var(--text-color);
+    }
+
+    /* शेअर बटण */
+    .share-container {
+      margin-top: 35px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .share-btn {
+      background: var(--accent-color);
+      color: #ffffff;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s ease, transform 0.1s ease;
+    }
+
+    .share-btn:hover {
+      opacity: 0.9;
+    }
+
+    .share-btn:active {
+      transform: scale(0.98);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 16px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .content-body p {
+        font-size: 0.98rem;
+        text-align: left; /* मोबाईलवर ओळींत अवाजवी अंतर येऊ नये म्हणून */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- थीम टॉगल बटण -->
+    <div class="top-bar">
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">🌙</span> <span id="themeLabel">Dark Mode</span>
+      </button>
+    </div>
+
+    <!-- मुख्य शीर्षक -->
+    <h1>रेडियो स्टेशनचे ट्यूनिंग आणि मानसिक स्वास्थ्य</h1>
+
+    <!-- संकल्पनेचे प्रतिनिधित्व करणारी मल्टीकलर SVG प्रतिमा -->
+    <div class="visual-wrapper">
+      <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Radio Waves and Mind Resonance">
+        <defs>
+          <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a1c29" />
+            <stop offset="50%" stop-color="#2a2040" />
+            <stop offset="100%" stop-color="#14283b" />
+          </linearGradient>
+          <linearGradient id="wave1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff3b30" />
+            <stop offset="50%" stop-color="#ff9500" />
+            <stop offset="100%" stop-color="#ffcc00" />
+          </linearGradient>
+          <linearGradient id="wave2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00c7be" />
+            <stop offset="50%" stop-color="#30b0c7" />
+            <stop offset="100%" stop-color="#34c759" />
+          </linearGradient>
+          <linearGradient id="wave3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#af52de" />
+            <stop offset="50%" stop-color="#5856d6" />
+            <stop offset="100%" stop-color="#007aff" />
+          </linearGradient>
+        </defs>
+
+        <!-- बॅकग्राउंड बॉक्स -->
+        <rect width="700" height="240" rx="12" fill="url(#bgGrad)" />
+
+        <!-- गोंधळात टाकणाऱ्या विविध फ्रिक्वेन्सी लहरी (Noise / Signals) -->
+        <path d="M 20 60 Q 50 10, 80 60 T 140 60 T 200 60 T 260 60" fill="none" stroke="#ff453a" stroke-width="2" opacity="0.35" />
+        <path d="M 20 180 Q 60 210, 100 180 T 180 180 T 260 180" fill="none" stroke="#ffd60a" stroke-width="2" opacity="0.35" />
+        <path d="M 440 60 Q 480 30, 520 60 T 600 60 T 680 60" fill="none" stroke="#bf5af2" stroke-width="2" opacity="0.35" />
+        <path d="M 440 180 Q 470 140, 500 180 T 560 180 T 620 180 T 680 180" fill="none" stroke="#30d158" stroke-width="2" opacity="0.35" />
+
+        <!-- केंद्रवर्ती रेझोनंट लहरी (Tuned Waves) -->
+        <path d="M 50 120 C 130 30, 200 210, 280 120 S 420 30, 500 120 S 610 210, 650 120" fill="none" stroke="url(#wave1)" stroke-width="3.5" opacity="0.9" />
+        <path d="M 50 120 C 120 190, 220 50, 310 120 S 440 190, 520 120 S 600 50, 650 120" fill="none" stroke="url(#wave2)" stroke-width="3" opacity="0.8" />
+        <path d="M 50 120 C 160 80, 210 160, 350 120 S 490 80, 650 120" fill="none" stroke="url(#wave3)" stroke-width="2.5" opacity="0.85" />
+
+        <!-- मध्यवर्ती ट्यूनिंग नोड / रेझोनन्स प्रतीक -->
+        <circle cx="350" cy="120" r="32" fill="#0d1117" stroke="url(#wave1)" stroke-width="3" />
+        <circle cx="350" cy="120" r="18" fill="#5856d6" opacity="0.8" />
+        <circle cx="350" cy="120" r="6" fill="#ffffff" />
+
+        <!-- अँटेना ट्रान्समिशन तरंग -->
+        <circle cx="350" cy="120" r="52" fill="none" stroke="#58a6ff" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.6" />
+        <circle cx="350" cy="120" r="75" fill="none" stroke="#34c759" stroke-width="1" stroke-dasharray="6,6" opacity="0.4" />
+      </svg>
+    </div>
+
+    <!-- मूळ दस्तऐवजातील संपूर्ण मजकूर -->
+    <div class="content-body">
+      <p>कोणत्याही रेडिओवर आपण निवडतो तेच स्टेशन कसे लागते याचा कधी विचार केला आहे का? कारण आपल्या आजूबाजूला आणि आरपार सर्वत्र असंख्य रेडिओ लहरींचा एक अदृश्य समुद्र पसरलेला असतो. या समुद्रातील प्रत्येक फ्रिक्वेन्सी एका विविक्षित रेडिओ स्टेशनची माहिती घेऊन प्रवास करत असते. त्यातून हवे ते स्टेशन ऐकण्यासाठी रेडिओ ‘ट्यून’ करणे म्हणजे या गोंधळातून आपल्याला हवा असलेला एक विशिष्ट सिग्नल अचूकपणे वेगळा काढण्याची महत्वपूर्ण प्रक्रिया.[cite: 1]</p>
+
+      <p>रेडियोलहरींच्या या महासागराशी रेडिओसेटचा पहिला संपर्क येतो तो त्याच्या अँटेनाद्वारे.[cite: 1] हा अँटेना त्याच्यापर्यंत पोहोचणाऱ्या सर्व रेडिओलहरी कोणताही भेदभाव न करता एकाच वेळी ग्रहण करतो.[cite: 1] त्यामुळे अँटेनामधून रेडिओच्या आत येणारे सिग्नल म्हणजे सर्व उपलब्ध फ्रिक्वेन्सीजचा एक ‘गोंधळात टाकणारा कल्लोळ’ असतो.[cite: 1]</p>
+
+      <p>या सर्व गदारोळातून रेडिओवर आपल्याला हवे ते स्टेशन कसे वाजते याचे उत्तर रेडिओच्या आत बसलेल्या एका ‘द्वारपाला’च्या कार्यात दडलेले आहे.[cite: 1] <em>LC </em>किंवा ‘ट्यूनिंग सर्किट’ नावाचा हा दरवान अत्यंत आज्ञाधारकपणे फक्त एकाच, म्हणजे आपण सांगू त्याच सिग्नलला पुढे प्रवेश देतो आणि बाकीच्यांना अडवतो.[cite: 1]</p>
+
+      <p>या द्वारपालाचे दोन मुख्य घटक असतात.[cite: 1] इंडक्टर आणि कपॅसिटर.[cite: 1] जेव्हा आपण यातील कपॅसिटरचा <em>capacitance</em> बदलतो त्यानुसार ते सर्किट एका विशिष्ट फ्रिक्वेन्सीवर कंपन पावते, तिलाच त्या सर्किटची <em>“रेझोनंट फ्रिक्वेन्सी”</em> म्हणतात.[cite: 1]</p>
+
+      <p>रेडिओ ‘ट्यून’ करण्याची मुख्य प्रक्रिया म्हणजे हा रेझोनन्स साधणे.[cite: 1] जेव्हा आपण रेडिओचा नॉब फिरवतो किंवा स्टेशन फ्रिक्वेन्सी <em>key-in</em> करतो, तेव्हा <em>LC </em>सर्किटची रेझोनंट फ्रिक्वेन्सी बदलते.[cite: 1] ज्या क्षणी ही बदललेली फ्रिक्वेन्सी आपल्याला हव्या असलेल्या विशिष्ट रेडिओ स्टेशनच्या तरंगांशी तंतोतंत जुळते, तेव्हाच ‘रेझोनन्स’ साधला जातो व ते सर्किट त्या विशिष्ट स्टेशनच्या सिग्नलमधून जास्तीत जास्त ऊर्जा शोषून घेऊन त्याला मोठे करते आणि त्याच वेळी नको असलेल्या इतर सर्व तरंगलहरींना प्रभावीपणे अडवते.[cite: 1]</p>
+
+      <p>रेझोनन्सच्या माध्यमातून हवी असलेली फ्रिक्वेन्सी वेगळी काढल्यानंतर रेडिओमधील ‘डिमॉड्युलेशन’ आणि ‘ॲम्प्लिफिकेशन’ या यंत्रणा त्यातून मूळ आवाज वेगळा काढून आणि तो मोठा करून आपल्याला स्पीकरमधून ऐकवतात.[cite: 1] अशाप्रकारे, भौतिकशास्त्रातल्या या रुक्ष भासणाऱ्या नियमांचा वापर करून अदृश्य लहरींच्या मंथनातून एका सुमधुर आवाजाचा जन्म होतो.[cite: 1]</p>
+
+      <p><em>इतके विविध-भारती ते बीबीसी व्हाया आकाशवाणी पुणे केंद्र असे नॉब गरागरा फिरवत एफएम पासून शॉर्टवेव्ह पर्यंत बॅंड-भ्रमण झाले तरी मनाच्या रेडिओवरचे मानसिक स्वास्थ्याचे स्टेशन काही सापडेचना, असे वाटले ना?[cite: 1]</em></p>
+
+      <p>या जगात आपण एकटे नसतो.[cite: 1] आपल्या घरात, कुटुंबात आणि आजूबाजूला अनेक सजीव आणि निर्जीव व्यक्तिमत्वे त्यांचे आणि आपण स्वतःचे वैशिष्ट्यपूर्ण तरंग सतत ट्रान्समिट करत वावरत असतो.[cite: 1] आपली इच्छा असो वा नसो, इतरांचे सिग्नल्स आपल्या आणि आपले प्रक्षेपण तरंग इतरांच्या संवेदानांच्या अँटेनांवर आदळत असतात.[cite: 1] एक प्रकारचा कल्लोळ असतो नुसता.[cite: 1]</p>
+
+      <p>या गदारोळात आपले मानसिक स्वास्थ्य टिकवायचे असेल, तर आपल्याला उपयुक्त, हवी ती आणि काही नेहमीची नात्यांची स्टेशने ‘ट्यून’ करणे; त्यांच्याशी असलेले ‘रेझोनेटेड फ्रिक्वेन्सी’ बॉन्ड टिकवून ठेवणे आणि त्यांचे सतत फाइन ट्यूनिंग करत राहणे याला पर्याय नाही.[cite: 1] त्यासाठी महत्वाचे ठरते ते आपल्या प्रत्येकाच्या आतील <em>LC circuit.[cite: 1]</em> हे सर्किट म्हणजे दुसरे तिसरे काही नसून, आपली बोलण्याची <em>‘लॅंग्वेज’ (L)</em> आणि वागण्याचे <em>‘कल्चर’ (C).[cite: 1]</em></p>
+
+      <p>चांगल्या सवयींचा जाणीवपूर्वक अंगिकार आणि शून्यवत अहंकार असला की हे <em>लॅंग्वेज-कल्चर (LC) सर्किट</em> भक्कम राहते.[cite: 1] चांगल्या सवयींमुळे आपले ‘कल्चर’ <em>(C)</em> सुधारते आणि शून्यवत अहंकारामुळे आपली ‘लॅंग्वेज’ <em>(L)</em> अधिक प्रभावी होते.[cite: 1] या <em>LC</em>ज मुळे आपली रेझोनंट फ्रिक्वेन्सी गरजेनुरूप बदलत राहणे शक्य होते.[cite: 1]</p>
+
+      <p>आवडीच्या आणि अर्थात ज्यांच्याशी इन-ट्यून रहाण्यास पर्याय नसतो अशा संबंधांच्या स्टेशन्सची फ्रिक्वेन्सी ‘रेझोनेट’ झाली तरी काही वेळा नात्यांमध्ये खरखर आणि डिस्टर्बन्स येण्याची शक्यता असते.[cite: 1] अशा वेळी प्रकरण डी-ट्यून होऊ नये यासाठी आणि संवाद पुन्हा सुस्पष्ट व्हावा याकरता कामी येते ते म्हणजे कृतज्ञता नावाचे ‘फाईन-ट्यूनिंग’ बटण![cite: 1]</p>
+
+      <p>आपण कोणीच सतत रिसिव्हिंग मोड मधे नसतो.[cite: 1] आपली स्वतःची एक फ्रिक्वेन्सी देखील सतत ब्रॉडकास्ट होत असते.[cite: 1] इथेही प्रत्येकाच्या आतले लॅंग्वेज-कल्चर <em>(LC) </em>सर्किट काम करते.[cite: 1] ते सुदृढ असले की आपली ट्रान्समिशन पॉवर स्ट्रॉंग राहून ब्रॉडकास्ट रेंज मोठी राहते.[cite: 1] त्यामुळे दूर-दूरचे उत्तम रिसीव्हर्स आपल्या बरोबर नात्याचे स्टेशन सहजपणे ट्यून करण्याची शक्यता वृद्धिंगत होते.[cite: 1]</p>
+
+      <p>या जगात आपण फक्त बाहेरील सिग्नल स्वीकारणारे निष्क्रीय रिसीव्हर नसून स्वतःच्या चांगल्या विचारांचे आणि मूल्यांचे प्रक्षेपण करणारे सामर्थ्यशाली ब्रॉडकास्टर देखील आहोत.[cite: 1] आपण जे काही ग्रहण करतो व ज्याप्रमाणे स्वतःला ‘ट्यून’ करतो, त्याचा थेट परिणाम आपल्या सेल्फ-ट्रान्समिशनच्या स्पष्टतेवर आणि ताकदीवर होत असतो.[cite: 1]</p>
+
+      <p>आपले <em>‘लँग्वेज-कल्चर’ </em>सर्किट जितके अधिक मजबूत आणि कृतज्ञ असेल तितकी जास्त सकारात्मकता आपण सभोवतालच्या कल्लोळातून ग्रहण करू शकू आणि तितकाच आपला स्वतःचा आवाज इतरांसाठी प्रेरणादायी ठरू शकेल.[cite: 1]</p>
+
+      <p>मानसिक स्वास्थ्य साधणे म्हणजे केवळ गोंगाट टाळणे नव्हे; तर आपल्या अस्तित्वाच्या ट्रान्सिव्हरला इतक्या कुशलतेने ट्यून करण्याची कला आत्मसात करणे आहे की ज्यामुळे एक चांगली व्यक्ती म्हणून <em>self-develop </em>होत असतानाच आपला वैयक्तिक सिग्नल देखील या जगात एक विश्वासार्ह आणि प्रेरणादायी ब्रॉडकास्ट-स्टेशन म्हणून स्थापित होऊ शकेल.[cite: 1]</p>
+
+      <p><em>So, let’s be in-tune with the tune..[cite: 1]</em></p>
+
+      <p class="sign-off">~२०२५१२१६[cite: 1]</p>
+    </div>
+
+    <!-- शेअर बटण -->
+    <div class="share-container">
+      <button class="share-btn" id="shareBtn" aria-label="Share this page">
+        <span>🔗</span> <span>Share Page</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // डार्क / लाईट थीम टॉगल व्यवस्थापन
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+
+    // युझरची सिस्टीम थीम किंवा आधीची निवड तपासणे
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+        themeLabel.textContent = 'Light Mode';
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        themeIcon.textContent = '🌙';
+        themeLabel.textContent = 'Dark Mode';
+      }
+      localStorage.setItem('theme', theme);
+    }
+
+    applyTheme(currentTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+
+    // वेब शेअर API (किंवा क्लिपबोर्ड कॉपी) द्वारे शेअरिंग
+    const shareBtn = document.getElementById('shareBtn');
+    shareBtn.addEventListener('click', async () => {
+      const shareData = {
+        title: document.title,
+        text: 'रेडियो स्टेशनचे ट्यूनिंग आणि मानसिक स्वास्थ्य',
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+        } catch (err) {
+          // युझरने कॅन्सल केल्यास दुर्लक्ष करा
+        }
+      } else {
+        // जर Web Share API उपलब्ध नसेल, तर लिंक कॉपी करा
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          const originalText = shareBtn.innerHTML;
+          shareBtn.innerHTML = '<span>✅</span> <span>Link Copied!</span>';
+          setTimeout(() => {
+            shareBtn.innerHTML = originalText;
+          }, 2000);
+        } catch (err) {
+          alert('Link: ' + window.location.href);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
