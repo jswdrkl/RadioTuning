@@ -1,518 +1,432 @@
 <!DOCTYPE html>
-<html lang="mr" data-theme="light">
+<html lang="mr" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>रेडियो स्टेशनचे ट्यूनिंग आणि मानसिक स्वास्थ्य</title>
   
-  <!-- IBM Plex Sans & IBM Plex Sans Devanagari Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"IBM Plex Sans Devanagari"', '"IBM Plex Sans"', 'sans-serif'],
+          },
+          colors: {
+            marathi: {
+              gold: '#F59E0B',
+              coral: '#F43F5E',
+              teal: '#0D9488',
+              navy: '#0F172A',
+            }
+          }
+        }
+      }
+    };
+  </script>
 
   <style>
-    :root {
-      --font-family: 'IBM Plex Sans Devanagari', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --bg-primary: #f8fafc;
-      --bg-surface: #ffffff;
-      --text-primary: #1e293b;
-      --text-secondary: #475569;
-      --text-muted: #64748b;
-      --accent: #2563eb;
-      --accent-soft: #dbeafe;
-      --accent-glow: rgba(37, 99, 235, 0.15);
-      --border-color: #e2e8f0;
-      --quote-border: #3b82f6;
-      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-    }
-
-    [data-theme="dark"] {
-      --bg-primary: #0b0f19;
-      --bg-surface: #111827;
-      --text-primary: #f1f5f9;
-      --text-secondary: #cbd5e1;
-      --text-muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.15);
-      --accent-glow: rgba(56, 189, 248, 0.2);
-      --border-color: #1f2937;
-      --quote-border: #38bdf8;
-      --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
-    }
-
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
     }
-
     body {
-      font-family: var(--font-family);
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.85;
-      font-size: 1.125rem;
-      padding: 1.5rem 1rem 4rem 1rem;
-      display: flex;
-      justify-content: center;
-
-      /* Words formatting configuration to avoid breaking */
-      word-break: keep-all;
-      overflow-wrap: break-word;
-      hyphens: none;
-      -webkit-hyphens: none;
+      font-family: 'IBM Plex Sans Devanagari', 'IBM Plex Sans', sans-serif;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
     }
-
-    .container {
-      width: 100%;
-      max-width: 760px;
-    }
-
-    /* Top Navigation bar */
-    .top-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      padding: 0.5rem 0;
-    }
-
-    .brand-tag {
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      background: var(--accent-soft);
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .actions-group {
-      display: flex;
-      gap: 0.65rem;
-    }
-
-    .action-btn {
-      background: var(--bg-surface);
-      color: var(--text-primary);
-      border: 1px solid var(--border-color);
-      padding: 0.5rem 0.9rem;
-      border-radius: 0.75rem;
-      cursor: pointer;
-      font-family: var(--font-family);
-      font-size: 0.875rem;
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-    }
-
-    .action-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* Main article card */
-    .article-card {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: 1.5rem;
-      padding: 2.75rem 2.25rem;
-      box-shadow: var(--card-shadow);
-    }
-
-    @media (max-width: 640px) {
-      .article-card {
-        padding: 1.75rem 1.25rem;
-        border-radius: 1.25rem;
-      }
-      body {
-        font-size: 1.05rem;
-        line-height: 1.75;
-      }
-    }
-
-    /* Header */
-    header {
-      margin-bottom: 2.25rem;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.15rem;
-      font-weight: 700;
-      line-height: 1.35;
-      color: var(--text-primary);
-      margin-bottom: 1rem;
-      letter-spacing: -0.01em;
-    }
-
-    @media (max-width: 640px) {
-      h1 {
-        font-size: 1.65rem;
-      }
-    }
-
-    .meta-date {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    /* Illustration container */
-    .hero-image-wrapper {
-      margin: 1.75rem 0 2.5rem 0;
-      border-radius: 1rem;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(56,189,248,0.12) 100%);
-      border: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1.5rem 1.5rem;
-    }
-
-    .hero-svg {
-      width: 100%;
-      max-width: 480px;
-      height: auto;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1));
-    }
-
-    .image-caption {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 1rem;
-      text-align: center;
-    }
-
-    /* Content styling */
-    p {
-      margin-bottom: 1.45rem;
-      color: var(--text-secondary);
+    .article-content {
       text-align: justify;
+      text-justify: inter-word;
+      word-break: keep-all;
+      overflow-wrap: normal;
+      hyphens: none;
+      -webkit-hyphens: none;
     }
-
-    strong {
-      color: var(--text-primary);
-      font-weight: 600;
+    .article-content p {
+      line-height: 1.95;
+      margin-bottom: 1.5rem;
     }
-
-    /* Section divider */
-    .section-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      margin: 2.5rem 0;
-      color: var(--accent);
-      opacity: 0.7;
+    
+    /* Subtle animations for the SVG artwork */
+    @keyframes pulse-ring {
+      0% { r: 12px; opacity: 0.9; }
+      50% { r: 42px; opacity: 0.3; }
+      100% { r: 65px; opacity: 0; }
     }
-
-    .section-divider span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: var(--accent);
-      display: inline-block;
+    @keyframes wave-flow {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -120; }
     }
-
-    /* Metaphor callout */
-    .highlight-box {
-      background-color: var(--accent-soft);
-      border-left: 4px solid var(--quote-border);
-      border-radius: 0 0.85rem 0.85rem 0;
-      padding: 1.35rem 1.5rem;
-      margin: 2rem 0;
-      font-size: 1.15rem;
-      color: var(--text-primary);
+    @keyframes float-gentle {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-7px); }
     }
-
-    .highlight-box p:last-child {
-      margin-bottom: 0;
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.7; filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6)); }
+      50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(244, 63, 94, 0.9)); }
     }
-
-    /* Footer phrase */
-    .article-outro {
-      margin-top: 2.5rem;
-      padding-top: 1.75rem;
-      border-top: 1px solid var(--border-color);
-      text-align: center;
-    }
-
-    .catchphrase {
-      font-style: italic;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.02em;
-    }
-
-    .footer-date {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-    }
-
-    /* Toast for copied link */
-    .toast {
-      position: fixed;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background-color: var(--text-primary);
-      color: var(--bg-primary);
-      padding: 0.65rem 1.25rem;
-      border-radius: 9999px;
-      font-size: 0.875rem;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 1000;
-      pointer-events: none;
-    }
-
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+    .anim-pulse-1 { animation: pulse-ring 3s cubic-bezier(0.2, 0.8, 0.4, 1) infinite; }
+    .anim-pulse-2 { animation: pulse-ring 3s cubic-bezier(0.2, 0.8, 0.4, 1) 1s infinite; }
+    .anim-pulse-3 { animation: pulse-ring 3s cubic-bezier(0.2, 0.8, 0.4, 1) 2s infinite; }
+    .anim-wave { stroke-dasharray: 8 6; animation: wave-flow 4s linear infinite; }
+    .anim-float { animation: float-gentle 4s ease-in-out infinite; }
+    .anim-glow { animation: glow-pulse 3.5s ease-in-out infinite; }
   </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 min-h-screen">
 
-  <div class="container">
-    <!-- Action Bar -->
-    <nav class="top-actions">
-      <div class="brand-tag">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19.1"/></svg>
-       
-      </div>
-      <div class="actions-group">
-        <button id="shareBtn" class="action-btn" title="शेअर करा">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-          शेअर
-        </button>
-        <button id="themeToggle" class="action-btn" title="थीम बदला">
-          <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          <span id="themeText">डार्क</span>
-        </button>
-      </div>
-    </nav>
+  <aside class="fixed top-4 right-4 z-50 flex items-center space-x-2 backdrop-blur-md bg-white/80 dark:bg-slate-900/85 p-1.5 rounded-full shadow-lg border border-slate-200/80 dark:border-slate-800/80 transition-all">
+    <!-- Theme Toggle Button -->
+    <button id="themeToggleBtn" type="button" aria-label="थीम बदला (Toggle Dark/Light)" 
+      class="p-2.5 rounded-full text-slate-700 dark:text-slate-200 hover:bg-slate-200/70 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors duration-200">
+      <!-- Sun Icon for Dark Mode -->
+      <svg id="sunIcon" class="w-5 h-5 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+          d="M12 3v1m0 16v1m9-9h-1M4 9.5H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+      <!-- Moon Icon for Light Mode -->
+      <svg id="moonIcon" class="w-5 h-5 block dark:hidden text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    </button>
 
-    <!-- Main Content Document -->
-    <main class="article-card">
-      <header>
-        <h1>रेडियो स्टेशनचे ट्यूनिंग आणि मानसिक स्वास्थ्य</h1>
-        <div class="meta-date">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          
-      </header>
+    <!-- Share Button -->
+    <button id="shareBtn" type="button" aria-label="शेअर करा (Share)"
+      class="p-2.5 rounded-full text-slate-700 dark:text-slate-200 hover:bg-slate-200/70 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors duration-200">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+          d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+      </svg>
+    </button>
+  </aside>
 
-      <!-- Converted Visual Art / Illustration -->
-      <figure class="hero-image-wrapper">
-        <svg class="hero-svg" viewBox="0 0 540 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Ambient Background Waves -->
-          <path d="M10 130 Q 135 60, 270 130 T 530 130" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
-          <path d="M10 130 Q 135 190, 270 130 T 530 130" stroke="#818cf8" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
-          <path d="M10 130 Q 135 20, 270 130 T 530 130" stroke="#2563eb" stroke-width="2" opacity="0.6"/>
-
-          <!-- Retro Modern Radio Body -->
-          <rect x="150" y="70" width="240" height="150" rx="18" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
-          
-          <!-- Antenna & Waves -->
-          <line x1="190" y1="70" x2="135" y2="20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="135" cy="20" r="4" fill="#38bdf8"/>
-          <path d="M125 15 C118 20, 118 30, 125 35" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-          <path d="M118 8 C108 17, 108 33, 118 42" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.7"/>
-
-          <!-- Speaker Grill -->
-          <rect x="172" y="96" width="95" height="98" rx="10" fill="#0f172a"/>
-          <g stroke="#334155" stroke-width="2.5" stroke-linecap="round">
-            <line x1="184" y1="112" x2="255" y2="112" />
-            <line x1="184" y1="126" x2="255" y2="126" />
-            <line x1="184" y1="140" x2="255" y2="140" />
-            <line x1="184" y1="154" x2="255" y2="154" />
-            <line x1="184" y1="168" x2="255" y2="168" />
-            <line x1="184" y1="182" x2="255" y2="182" />
-          </g>
-
-          <!-- Tuning Display Screen -->
-          <rect x="280" y="96" width="92" height="42" rx="6" fill="#0369a1"/>
-          <line x1="285" y1="117" x2="367" y2="117" stroke="#bae6fd" stroke-width="1"/>
-          <!-- Indicator needle -->
-          <line x1="326" y1="102" x2="326" y2="132" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
-          <text x="290" y="110" fill="#bae6fd" font-size="7" font-family="sans-serif">88</text>
-          <text x="320" y="110" fill="#bae6fd" font-size="7" font-family="sans-serif">98.3</text>
-          <text x="350" y="110" fill="#bae6fd" font-size="7" font-family="sans-serif">108</text>
-
-          <!-- Knobs (Tuning & Volume) -->
-          <circle cx="304" cy="168" r="16" fill="#334155" stroke="#94a3b8" stroke-width="1.5"/>
-          <circle cx="350" cy="168" r="16" fill="#334155" stroke="#94a3b8" stroke-width="1.5"/>
-          <line x1="304" y1="156" x2="304" y2="168" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
-          <line x1="350" y1="156" x2="350" y2="168" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
-          
-          <text x="294" y="195" fill="#94a3b8" font-size="8" font-family="sans-serif">VOL</text>
-          <text x="339" y="195" fill="#38bdf8" font-size="8" font-family="sans-serif">TUNE</text>
-        </svg>
-        <figcaption class="image-caption">लहरींचा कल्लोळ आणि अचूक रेझोनन्स साधणारे LC ट्यूनिंग</figcaption>
-      </figure>
-
-      <!-- Paragraphs -->
-      <article>
-        <p>
-          कोणत्याही रेडिओवर आपण निवडतो तेच स्टेशन कसे लागते याचा कधी विचार केला आहे का? कारण आपल्या आजूबाजूला आणि आरपार सर्वत्र असंख्य रेडिओ लहरींचा एक अदृश्य समुद्र पसरलेला असतो. या समुद्रातील प्रत्येक फ्रिक्वेन्सी एका विविक्षित रेडिओ स्टेशनची माहिती घेऊन प्रवास करत असते. त्यातून हवे ते स्टेशन ऐकण्यासाठी रेडिओ ‘ट्यून’ करणे म्हणजे या गोंधळातून आपल्याला हवा असलेला एक विशिष्ट सिग्नल अचूकपणे वेगळा काढण्याची महत्वपूर्ण प्रक्रिया.
-        </p>
-
-        <p>
-          रेडियोलहरींच्या या महासागराशी रेडिओसेटचा पहिला संपर्क येतो तो त्याच्या अँटेनाद्वारे. हा अँटेना त्याच्यापर्यंत पोहोचणाऱ्या सर्व रेडिओलहरी कोणताही भेदभाव न करता एकाच वेळी ग्रहण करतो. त्यामुळे अँटेनामधून रेडिओच्या आत येणारे सिग्नल म्हणजे सर्व उपलब्ध फ्रिक्वेन्सीजचा एक ‘गोंधळात टाकणारा कल्लोळ’ असतो.
-        </p>
-
-        <p>
-          या सर्व गदारोळातून रेडिओवर आपल्याला हवे ते स्टेशन कसे वाजते याचे उत्तर रेडिओच्या आत बसलेल्या एका ‘द्वारपाला’च्या कार्यात दडलेले आहे. LC किंवा ‘ट्यूनिंग सर्किट’ नावाचा हा दरवान अत्यंत आज्ञाधारकपणे फक्त एकाच, म्हणजे आपण सांगू त्याच सिग्नलला पुढे प्रवेश देतो आणि बाकीच्यांना अडवतो.
-        </p>
-
-        <p>
-          या द्वारपालाचे दोन मुख्य घटक असतात. इंडक्टर आणि कपॅसिटर. जेव्हा आपण यातील कपॅसिटरचा capacitance बदलतो त्यानुसार ते सर्किट एका विशिष्ट फ्रिक्वेन्सीवर कंपन पावते, तिलाच त्या सर्किटची “रेझोनंट फ्रिक्वेन्सी” म्हणतात.
-        </p>
-
-        <p>
-          रेडिओ ‘ट्यून’ करण्याची मुख्य प्रक्रिया म्हणजे हा रेझोनन्स साधणे. जेव्हा आपण रेडिओचा नॉब फिरवतो किंवा स्टेशन फ्रिक्वेन्सी key-in करतो, तेव्हा LC सर्किटची रेझोनंट फ्रिक्वेन्सी बदलते. ज्या क्षणी ही बदललेली फ्रिक्वेन्सी आपल्याला हव्या असलेल्या विशिष्ट रेडिओ स्टेशनच्या तरंगांशी तंतोतंत जुळते, तेव्हाच ‘रेझोनन्स’ साधला जातो व ते सर्किट त्या विशिष्ट स्टेशनच्या सिग्नलमधून जास्तीत जास्त ऊर्जा शोषून घेऊन त्याला मोठे करते आणि त्याच वेळी नको असलेल्या इतर सर्व तरंगलहरींना प्रभावीपणे अडवते.
-        </p>
-
-        <p>
-          रेझोनन्सच्या माध्यमातून हवी असलेली फ्रिक्वेन्सी वेगळी काढल्यानंतर रेडिओमधील ‘डिमॉड्युलेशन’ आणि ‘ॲम्प्लिफिकेशन’ या यंत्रणा त्यातून मूळ आवाज वेगळा काढून आणि तो मोठा करून आपल्याला स्पीकरमधून ऐकवतात. अशाप्रकारे, भौतिकशास्त्रातल्या या रुक्ष भासणाऱ्या नियमांचा वापर करून अदृश्य लहरींच्या मंथनातून एका सुमधुर आवाजाचा जन्म होतो.
-        </p>
-
-        <div class="section-divider">
-          <span></span><span></span><span></span>
-        </div>
-
-        <div class="highlight-box">
-          <p>
-            इतके विविध-भारती ते बीबीसी व्हाया आकाशवाणी पुणे केंद्र असे नॉब गरागरा फिरवत एफएम पासून शॉर्टवेव्ह पर्यंत बॅंड-भ्रमण झाले तरी मनाच्या रेडिओवरचे मानसिक स्वास्थ्याचे स्टेशन काही सापडेचना, असे वाटले ना?
-          </p>
-        </div>
-
-        <div class="section-divider">
-          <span></span><span></span><span></span>
-        </div>
-
-        <p>
-          या जगात आपण एकटे नसतो. आपल्या घरात, कुटुंबात आणि आजूबाजूला अनेक सजीव आणि निर्जीव व्यक्तिमत्वे त्यांचे आणि आपण स्वतःचे वैशिष्ट्यपूर्ण तरंग सतत ट्रान्समिट करत वावरत असतो. आपली इच्छा असो वा नसो, इतरांचे सिग्नल्स आपल्या आणि आपले प्रक्षेपण तरंग इतरांच्या संवेदानांच्या अँटेनांवर आदळत असतात. एक प्रकारचा कल्लोळ असतो नुसता.
-        </p>
-
-        <p>
-          या गदारोळात आपले मानसिक स्वास्थ्य टिकवायचे असेल, तर आपल्याला उपयुक्त, हवी ती आणि काही नेहमीची नात्यांची स्टेशने ‘ट्यून’ करणे; त्यांच्याशी असलेले ‘रेझोनेटेड फ्रिक्वेन्सी’ बॉन्ड टिकवून ठेवणे आणि त्यांचे सतत फाइन ट्यूनिंग करत राहणे याला पर्याय नाही. त्यासाठी महत्वाचे ठरते ते आपल्या प्रत्येकाच्या आतील LC circuit. हे सर्किट म्हणजे दुसरे तिसरे काही नसून, आपली बोलण्याची <strong>‘लॅंग्वेज’ (L)</strong> आणि वागण्याचे <strong>‘कल्चर’ (C)</strong>.
-        </p>
-
-        <p>
-          चांगल्या सवयींचा जाणीवपूर्वक अंगिकार आणि शून्यवत अहंकार असला की हे लॅंग्वेज-कल्चर (LC) सर्किट भक्कम राहते. चांगल्या सवयींमुळे आपले ‘कल्चर’ (C) सुधारते आणि शून्यवत अहंकारामुळे आपली ‘लॅंग्वेज’ (L) अधिक प्रभावी होते. या LCज मुळे आपली रेझोनंट फ्रिक्वेन्सी गरजेनुरूप बदलत राहणे शक्य होते.
-        </p>
-
-        <p>
-          आवडीच्या आणि अर्थात ज्यांच्याशी इन-ट्यून रहाण्यास पर्याय नसतो अशा संबंधांच्या स्टेशन्सची फ्रिक्वेन्सी ‘रेझोनेट’ झाली तरी काही वेळा नात्यांमध्ये खरखर आणि डिस्टर्बन्स येण्याची शक्यता असते. अशा वेळी प्रकरण डी-ट्यून होऊ नये यासाठी आणि संवाद पुन्हा सुस्पष्ट व्हावा याकरता कामी येते ते म्हणजे <strong>कृतज्ञता</strong> नावाचे ‘फाईन-ट्यूनिंग’ बटण!
-        </p>
-
-        <p>
-          आपण कोणीच सतत रिसिव्हिंग मोड मधे नसतो. आपली स्वतःची एक फ्रिक्वेन्सी देखील सतत ब्रॉडकास्ट होत असते. इथेही प्रत्येकाच्या आतले लॅंग्वेज-कल्चर (LC) सर्किट काम करते. ते सुदृढ असले की आपली ट्रान्समिशन पॉवर स्ट्रॉंग राहून ब्रॉडकास्ट रेंज मोठी राहते. त्यामुळे दूर-दूरचे उत्तम रिसीव्हर्स आपल्या बरोबर नात्याचे स्टेशन सहजपणे ट्यून करण्याची शक्यता वृद्धिंगत होते.
-        </p>
-
-        <p>
-          या जगात आपण फक्त बाहेरील सिग्नल स्वीकारणारे निष्क्रीय रिसीव्हर नसून स्वतःच्या चांगल्या विचारांचे आणि मूल्यांचे प्रक्षेपण करणारे सामर्थ्यशाली ब्रॉडकास्टर देखील आहोत. आपण जे काही ग्रहण करतो व ज्याप्रमाणे स्वतःला ‘ट्यून’ करतो, त्याचा थेट परिणाम आपल्या सेल्फ-ट्रान्समिशनच्या स्पष्टतेवर आणि ताकदीवर होत असतो.
-        </p>
-
-        <p>
-          आपले ‘लँग्वेज-कल्चर’ सर्किट जितके अधिक मजबूत आणि कृतज्ञ असेल तितकी जास्त सकारात्मकता आपण सभोवतालच्या कल्लोळातून ग्रहण करू शकू आणि तितकाच आपला स्वतःचा आवाज इतरांसाठी प्रेरणादायी ठरू शकेल.
-        </p>
-
-        <p>
-          मानसिक स्वास्थ्य साधणे म्हणजे केवळ गोंगाट टाळणे नव्हे; तर आपल्या अस्तित्वाच्या ट्रान्सिव्हरला इतक्या कुशलतेने ट्यून करण्याची कला आत्मसात करणे आहे की ज्यामुळे एक चांगली व्यक्ती म्हणून self-develop होत असतानाच आपला वैयक्तिक सिग्नल देखील या जगात एक विश्वासार्ह आणि प्रेरणादायी ब्रॉडकास्ट-स्टेशन म्हणून स्थापित होऊ शकेल.
-        </p>
-
-        <div class="article-outro">
-          <p class="catchphrase">So, let’s be in-tune with the tune..</p>
-          <div class="footer-date">~ २०२५१२१६</div>
-        </div>
-      </article>
-    </main>
+  <!-- Notification Toast for Share feedback -->
+  <div id="toastMessage" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900/90 text-white dark:bg-slate-100 dark:text-slate-900 px-5 py-2.5 rounded-full shadow-2xl text-sm font-medium tracking-wide transition-all duration-300 opacity-0 pointer-events-none transform translate-y-3">
+    लिंक कॉपी झाली!
   </div>
 
-  <div id="toast" class="toast">वेबपेज लिंक कॉपी झाली!</div>
+  <main class="max-w-3xl mx-auto px-5 sm:px-8 pt-16 pb-24 text-slate-800 dark:text-slate-200">
+    
+    <!-- Title -->
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-normal leading-snug sm:leading-tight mb-8 text-center text-slate-900 dark:text-white">
+      रेडियो स्टेशनचे ट्यूनिंग आणि मानसिक स्वास्थ्य
+    </h1>
+
+    <div class="my-8 w-full flex justify-center">
+      <div class="w-full max-w-2xl rounded-2xl overflow-hidden shadow-xl border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-br from-amber-500/10 via-indigo-500/5 to-teal-500/10 dark:from-slate-900 dark:via-slate-850 dark:to-slate-900 p-2 sm:p-4">
+        <svg viewBox="0 0 800 450" class="w-full h-auto drop-shadow-sm select-none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="रेडियो ट्यूनिंग, LC सर्किट आणि मनाच्या लहरींचे प्रतीकात्मक चित्रण">
+          <defs>
+            <!-- Gradients -->
+            <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.8" />
+              <stop offset="50%" stop-color="#0f172a" stop-opacity="0.95" />
+              <stop offset="100%" stop-color="#134e4a" stop-opacity="0.8" />
+            </linearGradient>
+            <linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f59e0b" />
+              <stop offset="100%" stop-color="#ef4444" />
+            </linearGradient>
+            <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="100%" stop-color="#2dd4bf" />
+            </linearGradient>
+            <linearGradient id="violetGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#a855f7" />
+              <stop offset="100%" stop-color="#ec4899" />
+            </linearGradient>
+            <radialGradient id="emitterRadial" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fbbf24" stop-opacity="1" />
+              <stop offset="40%" stop-color="#f59e0b" stop-opacity="0.8" />
+              <stop offset="100%" stop-color="#ea580c" stop-opacity="0" />
+            </radialGradient>
+            <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- Cosmic / Ether Background Canvas -->
+          <rect width="800" height="450" rx="16" fill="url(#bgGrad)" />
+
+          <!-- Background Chaos Radio Spectrum Waves (The Invisible Ocean of Waves) -->
+          <g opacity="0.35">
+            <path d="M 0 90 Q 200 40, 400 90 T 800 90" fill="none" stroke="#60a5fa" stroke-width="1.5" class="anim-wave" />
+            <path d="M 0 130 Q 150 180, 400 130 T 800 130" fill="none" stroke="#c084fc" stroke-width="1" stroke-dasharray="4 4" />
+            <path d="M 0 320 Q 250 260, 500 320 T 800 320" fill="none" stroke="#34d399" stroke-width="1.5" class="anim-wave" style="animation-direction: reverse;" />
+            <path d="M 0 380 Q 200 420, 400 380 T 800 380" fill="none" stroke="#f472b6" stroke-width="1" />
+          </g>
+
+          <!-- Left Side: Classical Radio with Antenna receiving the chaotic sea -->
+          <g transform="translate(70, 160)" class="anim-float">
+            <!-- Receiving Waves converging on antenna -->
+            <path d="M -30 -60 Q 20 -40, 50 -10" fill="none" stroke="#93c5fd" stroke-width="2" stroke-dasharray="3 3" opacity="0.7"/>
+            <path d="M -20 -80 Q 25 -50, 50 -10" fill="none" stroke="#f472b6" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+            <path d="M -40 -30 Q 10 -20, 50 -10" fill="none" stroke="#fde047" stroke-width="2" opacity="0.5"/>
+
+            <!-- Antenna -->
+            <line x1="50" y1="-10" x2="30" y2="70" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="50" cy="-10" r="4.5" fill="#f59e0b" filter="url(#softGlow)"/>
+
+            <!-- Radio Body -->
+            <rect x="15" y="70" width="165" height="110" rx="14" fill="#1e293b" stroke="#475569" stroke-width="2.5" />
+            
+            <!-- Radio Dial & Speaker Grill -->
+            <rect x="30" y="85" width="75" height="35" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.5" />
+            <!-- Frequency scale lines -->
+            <line x1="38" y1="102" x2="97" y2="102" stroke="#475569" stroke-width="1" />
+            <line x1="45" y1="94" x2="45" y2="110" stroke="#f59e0b" stroke-width="2" />
+            <text x="40" y="93" fill="#94a3b8" font-size="7" font-family="monospace">FM . SW</text>
+
+            <!-- Speaker Slits -->
+            <g stroke="#334155" stroke-width="2" stroke-linecap="round">
+              <line x1="122" y1="88" x2="162" y2="88" />
+              <line x1="122" y1="96" x2="162" y2="96" />
+              <line x1="122" y1="104" x2="162" y2="104" />
+              <line x1="122" y1="112" x2="162" y2="112" />
+            </g>
+
+            <!-- Tuning Knobs -->
+            <circle cx="48" cy="148" r="14" fill="#334155" stroke="#64748b" stroke-width="2"/>
+            <circle cx="48" cy="148" r="3" fill="#f59e0b"/>
+            <circle cx="95" cy="148" r="11" fill="#334155" stroke="#64748b" stroke-width="2"/>
+            <circle cx="140" cy="148" r="11" fill="#334155" stroke="#64748b" stroke-width="2"/>
+            <text x="35" y="174" fill="#94a3b8" font-size="8" font-weight="bold">TUNING</text>
+          </g>
+
+          <!-- Middle: The Resonant LC Circuit Gateway (Language-Culture Gatekeeper) -->
+          <g transform="translate(310, 140)">
+            <!-- Gateway Aura -->
+            <rect x="0" y="20" width="180" height="170" rx="20" fill="#0f172a" fill-opacity="0.85" stroke="url(#cyanGlow)" stroke-width="2.5" />
+            
+            <text x="90" y="52" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">LC CIRCUIT</text>
+            <text x="90" y="68" fill="#94a3b8" font-size="10" text-anchor="middle">रेझोनन्स द्वारपाल</text>
+
+            <!-- Inductor (Language - L) Symbol -->
+            <g transform="translate(25, 80)">
+              <path d="M 5,30 Q 14,0 23,30 Q 32,0 41,30 Q 50,0 59,30 Q 68,0 77,30" fill="none" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"/>
+              <text x="41" y="52" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">L (Language)</text>
+            </g>
+
+            <!-- Capacitor (Culture - C) Symbol with arrow representing Fine-Tuning -->
+            <g transform="translate(100, 80)">
+              <line x1="28" y1="12" x2="28" y2="48" stroke="#2dd4bf" stroke-width="4" stroke-linecap="round"/>
+              <line x1="42" y1="12" x2="42" y2="48" stroke="#2dd4bf" stroke-width="4" stroke-linecap="round"/>
+              <!-- Variable tuning arrow -->
+              <line x1="18" y1="46" x2="52" y2="14" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" />
+              <polygon points="54,12 45,14 50,21" fill="#f59e0b"/>
+              <text x="35" y="64" fill="#2dd4bf" font-size="11" font-weight="bold" text-anchor="middle">C (Culture)</text>
+            </g>
+
+            <!-- Fine-Tuning Indicator Badge -->
+            <rect x="35" y="152" width="110" height="22" rx="11" fill="#134e4a" stroke="#2dd4bf" stroke-width="1.5" />
+            <text x="90" y="167" fill="#fef08a" font-size="9.5" font-weight="600" text-anchor="middle">कृतज्ञता : Fine-Tuning</text>
+          </g>
+
+          <!-- Connecting Signal Bridges with moving pulses -->
+          <path d="M 235 245 L 310 245" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" class="anim-wave"/>
+          <path d="M 490 245 L 565 245" fill="none" stroke="url(#cyanGlow)" stroke-width="3.5" stroke-linecap="round" class="anim-wave"/>
+
+          <!-- Right Side: Mind & Consciousness Broadcast (मानसिक स्वास्थ्य - Transceiver) -->
+          <g transform="translate(635, 235)" class="anim-float" style="animation-delay: -2s;">
+            
+            <!-- Resonant Waves Radiating outwards -->
+            <circle cx="0" cy="0" r="18" fill="none" stroke="#fbbf24" stroke-width="2.5" class="anim-pulse-1" />
+            <circle cx="0" cy="0" r="32" fill="none" stroke="#f43f5e" stroke-width="2" class="anim-pulse-2" />
+            <circle cx="0" cy="0" r="48" fill="none" stroke="#a855f7" stroke-width="1.5" class="anim-pulse-3" />
+
+            <!-- Brain / Mind Silhouette with Glowing Center -->
+            <circle cx="0" cy="0" r="32" fill="#1e1b4b" stroke="url(#violetGlow)" stroke-width="2.5" />
+            
+            <!-- Mind & Radiance Glyph -->
+            <path d="M -14 -6 C -14 -18, 0 -22, 0 -22 C 0 -22, 14 -18, 14 -6 C 18 -4, 18 6, 13 12 C 10 16, 6 18, 0 20 C -6 18, -10 16, -13 12 C -18 6, -18 -4, -14 -6 Z" 
+                  fill="none" stroke="#f8fafc" stroke-width="2" stroke-linejoin="round" class="anim-glow"/>
+            
+            <circle cx="0" cy="-2" r="7" fill="#fbbf24" filter="url(#softGlow)" />
+
+            <!-- Broadcast Mast / Mind Antenna -->
+            <line x1="0" y1="-22" x2="0" y2="-45" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+            <polygon points="0,-52 -5,-44 5,-44" fill="#f59e0b" />
+
+            <!-- Musical / Harmonious Resonance Notes Floating Away -->
+            <g fill="#38bdf8" opacity="0.9" transform="translate(25, -45)">
+              <text font-size="16" font-family="sans-serif">♪</text>
+            </g>
+            <g fill="#f43f5e" opacity="0.85" transform="translate(38, -15)">
+              <text font-size="14" font-family="sans-serif">♫</text>
+            </g>
+            <g fill="#facc15" opacity="0.95" transform="translate(28, 25)">
+              <text font-size="18" font-family="sans-serif">✨</text>
+            </g>
+            
+            <text x="0" y="52" fill="#fed7aa" font-size="11" font-weight="bold" text-anchor="middle">ट्रान्सिव्हर (Transceiver)</text>
+            <text x="0" y="67" fill="#cbd5e1" font-size="9" text-anchor="middle">स्वास्थ्याचे सुमधुर तरंग</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <article class="article-content text-base sm:text-lg leading-relaxed space-y-6 pt-2">
+      
+      <p>
+        कोणत्याही रेडिओवर आपण निवडतो तेच स्टेशन कसे लागते याचा कधी विचार केला आहे का? कारण आपल्या आजूबाजूला आणि आरपार सर्वत्र असंख्य रेडिओ लहरींचा एक अदृश्य समुद्र पसरलेला असतो. या समुद्रातील प्रत्येक फ्रिक्वेन्सी एका विविक्षित रेडिओ स्टेशनची माहिती घेऊन प्रवास करत असते. त्यातून हवे ते स्टेशन ऐकण्यासाठी रेडिओ ‘ट्यून’ करणे म्हणजे या गोंधळातून आपल्याला हवा असलेला एक विशिष्ट सिग्नल अचूकपणे वेगळा काढण्याची महत्वपूर्ण प्रक्रिया.
+      </p>
+
+      <p>
+        रेडियोलहरींच्या या महासागराशी रेडिओसेटचा पहिला संपर्क येतो तो त्याच्या अँटेनाद्वारे. हा अँटेना त्याच्यापर्यंत पोहोचणाऱ्या सर्व रेडिओलहरी कोणताही भेदभाव न करता एकाच वेळी ग्रहण करतो. त्यामुळे अँटेनामधून रेडिओच्या आत येणारे सिग्नल म्हणजे सर्व उपलब्ध फ्रिक्वेन्सीजचा एक ‘गोंधळात टाकणारा कल्लोळ’ असतो.
+      </p>
+
+      <p>
+        या सर्व गदारोळातून रेडिओवर आपल्याला हवे ते स्टेशन कसे वाजते याचे उत्तर रेडिओच्या आत बसलेल्या एका ‘द्वारपाला’च्या कार्यात दडलेले आहे. LC किंवा ‘ट्यूनिंग सर्किट’ नावाचा हा दरवान अत्यंत आज्ञाधारकपणे फक्त एकाच, म्हणजे आपण सांगू त्याच सिग्नलला पुढे प्रवेश देतो आणि बाकीच्यांना अडवतो.
+      </p>
+
+      <p>
+        या द्वारपालाचे दोन मुख्य घटक असतात. इंडक्टर आणि कपॅसिटर. जेव्हा आपण यातील कपॅसिटरचा capacitance बदलतो त्यानुसार ते सर्किट एका विशिष्ट फ्रिक्वेन्सीवर कंपन पावते, तिलाच त्या सर्किटची “रेझोनंट फ्रिक्वेन्सी” म्हणतात.
+      </p>
+
+      <p>
+        रेडिओ ‘ट्यून’ करण्याची मुख्य प्रक्रिया म्हणजे हा रेझोनन्स साधणे. जेव्हा आपण रेडिओचा नॉब फिरवतो किंवा स्टेशन फ्रिक्वेन्सी key-in करतो, तेव्हा LC सर्किटची रेझोनंट फ्रिक्वेन्सी बदलते. ज्या क्षणी ही बदललेली फ्रिक्वेन्सी आपल्याला हव्या असलेल्या विशिष्ट रेडिओ स्टेशनच्या तरंगांशी तंतोतंत जुळते, तेव्हाच ‘रेझोनन्स’ साधला जातो व ते सर्किट त्या विशिष्ट स्टेशनच्या सिग्नलमधून जास्तीत जास्त ऊर्जा शोषून घेऊन त्याला मोठे करते आणि त्याच वेळी नको असलेल्या इतर सर्व तरंगलहरींना प्रभावीपणे अडवते.
+      </p>
+
+      <p>
+        रेझोनन्सच्या माध्यमातून हवी असलेली फ्रिक्वेन्सी वेगळी काढल्यानंतर रेडिओमधील ‘डिमॉड्युलेशन’ आणि ‘ॲम्प्लिफिकेशन’ या यंत्रणा त्यातून मूळ आवाज वेगळा काढून आणि तो मोठा करून आपल्याला स्पीकरमधून ऐकवतात. अशाप्रकारे, भौतिकशास्त्रातल्या या रुक्ष भासणाऱ्या नियमांचा वापर करून अदृश्य लहरींच्या मंथनातून एका सुमधुर आवाजाचा जन्म होतो.
+      </p>
+
+      <div class="text-center my-6 text-slate-400 dark:text-slate-600 font-semibold tracking-widest select-none">
+        **
+      </div>
+
+      <p>
+        इतके विविध-भारती ते बीबीसी व्हाया आकाशवाणी पुणे केंद्र असे नॉब गरागरा फिरवत एफएम पासून शॉर्टवेव्ह पर्यंत बॅंड-भ्रमण झाले तरी मनाच्या रेडिओवरचे मानसिक स्वास्थ्याचे स्टेशन काही सापडेचना, असे वाटले ना?
+      </p>
+
+      <div class="text-center my-6 text-slate-400 dark:text-slate-600 font-semibold tracking-widest select-none">
+        **
+      </div>
+
+      <p>
+        या जगात आपण एकटे नसतो. आपल्या घरात, कुटुंबात आणि आजूबाजूला अनेक सजीव आणि निर्जीव व्यक्तिमत्वे त्यांचे आणि आपण स्वतःचे वैशिष्ट्यपूर्ण तरंग सतत ट्रान्समिट करत वावरत असतो. आपली इच्छा असो वा नसो, इतरांचे सिग्नल्स आपल्या आणि आपले प्रक्षेपण तरंग इतरांच्या संवेदानांच्या अँटेनांवर आदळत असतात. एक प्रकारचा कल्लोळ असतो नुसता.
+      </p>
+
+      <p>
+        या गदारोळात आपले मानसिक स्वास्थ्य टिकवायचे असेल, तर आपल्याला उपयुक्त, हवी ती आणि काही नेहमीची नात्यांची स्टेशने ‘ट्यून’ करणे; त्यांच्याशी असलेले ‘रेझोनेटेड फ्रिक्वेन्सी’ बॉन्ड टिकवून ठेवणे आणि त्यांचे सतत फाइन ट्यूनिंग करत राहणे याला पर्याय नाही. त्यासाठी महत्वाचे ठरते ते आपल्या प्रत्येकाच्या आतील LC circuit. हे सर्किट म्हणजे दुसरे तिसरे काही नसून, आपली बोलण्याची ‘लॅंग्वेज’ (L) आणि वागण्याचे ‘कल्चर’ (C).
+      </p>
+
+      <p>
+        चांगल्या सवयींचा जाणीवपूर्वक अंगिकार आणि शून्यवत अहंकार असला की हे लॅंग्वेज-कल्चर (LC) सर्किट भक्कम राहते. चांगल्या सवयींमुळे आपले ‘कल्चर’ (C) सुधारते आणि शून्यवत अहंकारामुळे आपली ‘लॅंग्वेज’ (L) अधिक प्रभावी होते. या LCज मुळे आपली रेझोनंट फ्रिक्वेन्सी गरजेनुरूप बदलत राहणे शक्य होते.
+      </p>
+
+      <p>
+        आवडीच्या आणि अर्थात ज्यांच्याशी इन-ट्यून रहाण्यास पर्याय नसतो अशा संबंधांच्या स्टेशन्सची फ्रिक्वेन्सी ‘रेझोनेट’ झाली तरी काही वेळा नात्यांमध्ये खरखर आणि डिस्टर्बन्स येण्याची शक्यता असते. अशा वेळी प्रकरण डी-ट्यून होऊ नये यासाठी आणि संवाद पुन्हा सुस्पष्ट व्हावा याकरता कामी येते ते म्हणजे कृतज्ञता नावाचे ‘फाईन-ट्यूनिंग’ बटण!
+      </p>
+
+      <p>
+        आपण कोणीच सतत रिसिव्हिंग मोड मधे नसतो. आपली स्वतःची एक फ्रिक्वेन्सी देखील सतत ब्रॉडकास्ट होत असते. इथेही प्रत्येकाच्या आतले लॅंग्वेज-कल्चर (LC) सर्किट काम करते. ते सुदृढ असले की आपली ट्रान्समिशन पॉवर स्ट्रॉंग राहून ब्रॉडकास्ट रेंज मोठी राहते. त्यामुळे दूर-दूरचे उत्तम रिसीव्हर्स आपल्या बरोबर नात्याचे स्टेशन सहजपणे ट्यून करण्याची शक्यता वृद्धिंगत होते.
+      </p>
+
+      <p>
+        या जगात आपण फक्त बाहेरील सिग्नल स्वीकारणारे निष्क्रीय रिसीव्हर नसून स्वतःच्या चांगल्या विचारांचे आणि मूल्यांचे प्रक्षेपण करणारे सामर्थ्यशाली ब्रॉडकास्टर देखील आहोत. आपण जे काही ग्रहण करतो व ज्याप्रमाणे स्वतःला ‘ट्यून’ करतो, त्याचा थेट परिणाम आपल्या सेल्फ-ट्रान्समिशनच्या स्पष्टतेवर आणि ताकदीवर होत असतो.
+      </p>
+
+      <p>
+        आपले ‘लँग्वेज-कल्चर’ सर्किट जितके अधिक मजबूत आणि कृतज्ञ असेल तितकी जास्त सकारात्मकता आपण सभोवतालच्या कल्लोळातून ग्रहण करू शकू आणि तितकाच आपला स्वतःचा आवाज इतरांसाठी प्रेरणादायी ठरू शकेल.
+      </p>
+
+      <p>
+        मानसिक स्वास्थ्य साधणे म्हणजे केवळ गोंगाट टाळणे नव्हे; तर आपल्या अस्तित्वाच्या ट्रान्सिव्हरला इतक्या कुशलतेने ट्यून करण्याची कला आत्मसात करणे आहे की ज्यामुळे एक चांगली व्यक्ती म्हणून self-develop होत असतानाच आपला वैयक्तिक सिग्नल देखील या जगात एक विश्वासार्ह आणि प्रेरणादायी ब्रॉडकास्ट-स्टेशन म्हणून स्थापित होऊ शकेल.
+      </p>
+
+      <p class="italic text-center sm:text-right pt-2 font-medium text-amber-700 dark:text-amber-400">
+        So, let’s be in-tune with the tune..
+      </p>
+
+      <div class="text-center my-6 text-slate-400 dark:text-slate-600 font-semibold tracking-widest select-none">
+        **
+      </div>
+
+      <p class="text-right text-sm text-slate-500 dark:text-slate-400">
+        ~२०२५१२१६
+      </p>
+
+    </article>
+  </main>
 
   <script>
-    // Theme Management
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const themeText = document.getElementById('themeText');
-    const themeIcon = document.getElementById('themeIcon');
-    const html = document.documentElement;
+    (function () {
+      // Theme toggling functionality
+      const htmlEl = document.documentElement;
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
 
-    function setTheme(theme) {
-      html.setAttribute('data-theme', theme);
-      localStorage.setItem('preferred-theme', theme);
-      
-      if (theme === 'dark') {
-        themeText.textContent = 'लाइट';
-        themeIcon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+      // Check system preference or stored preference
+      const storedTheme = localStorage.getItem('site-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+        htmlEl.classList.add('dark');
       } else {
-        themeText.textContent = 'डार्क';
-        themeIcon.innerHTML = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
+        htmlEl.classList.remove('dark');
       }
-    }
 
-    // Check saved theme or system preference
-    const savedTheme = localStorage.getItem('preferred-theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else if (systemPrefersDark) {
-      setTheme('dark');
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = html.getAttribute('data-theme');
-      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-    });
-
-    // Share Functionality
-    const shareBtn = document.getElementById('shareBtn');
-    const toast = document.getElementById('toast');
-
-    function showToast(msg) {
-      if (msg) toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
-    }
-
-    shareBtn.addEventListener('click', async () => {
-      const shareData = {
-        title: 'रेडियो स्टेशनचे ट्यूनिंग आणि मानसिक स्वास्थ्य',
-        text: 'आपल्या अस्तित्वाच्या ट्रान्सिव्हरला कुशलतेने ट्यून करण्याची कला.. नक्की वाचा!',
-        url: window.location.href,
-      };
-
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-        } catch (err) {
-          // Fallback if dismissed or failed
+      themeToggleBtn.addEventListener('click', function () {
+        if (htmlEl.classList.contains('dark')) {
+          htmlEl.classList.remove('dark');
+          localStorage.setItem('site-theme', 'light');
+        } else {
+          htmlEl.classList.add('dark');
+          localStorage.setItem('site-theme', 'dark');
         }
-      } else {
-        navigator.clipboard.writeText(window.location.href);
-        showToast('वेबपेज लिंक कॉपी झाली!');
+      });
+
+      // Toast notification helper
+      const toast = document.getElementById('toastMessage');
+      let toastTimer = null;
+      function showToast(msg) {
+        if (msg) toast.innerText = msg;
+        toast.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+        }, 2500);
       }
-    });
+
+      // Safe share / copy implementation
+      const shareBtn = document.getElementById('shareBtn');
+      shareBtn.addEventListener('click', function () {
+        const shareData = {
+          title: 'रेडियो स्टेशनचे ट्यूनिंग आणि मानसिक स्वास्थ्य',
+          url: window.location.href
+        };
+
+        if (navigator.share) {
+          navigator.share(shareData).catch(function () {
+            copyFallback();
+          });
+        } else {
+          copyFallback();
+        }
+
+        function copyFallback() {
+          const tempInput = document.createElement('input');
+          tempInput.value = window.location.href;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          try {
+            document.execCommand('copy');
+            showToast('लिंक क्लिपबोर्डवर कॉपी झाली!');
+          } catch (err) {
+            showToast('कृपया URL कॉपी करा');
+          }
+          document.body.removeChild(tempInput);
+        }
+      });
+    })();
   </script>
 </body>
 </html>
