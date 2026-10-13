@@ -47,7 +47,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 2.5rem 1rem 8rem 1rem;
+      padding: 2.5rem 1rem 3rem 1rem;
       word-wrap: break-word;
       overflow-wrap: break-word;
       word-break: normal;
@@ -141,45 +141,56 @@
       margin-bottom: 1rem;
     }
 
-    .share-container {
+    .share-wrapper {
       width: 100%;
       display: block;
+      clear: both;
       margin-top: 3.5rem;
-      padding-top: 2rem;
-      border-top: 2px solid var(--border-color);
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border-color);
       text-align: center;
     }
 
-    .share-btn {
+    .share-action-btn {
+      appearance: none;
+      -webkit-appearance: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
       background-color: var(--accent-color);
       color: #ffffff;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.25);
       font-family: 'Ubuntu', sans-serif;
       font-size: 1.25rem;
       font-weight: 500;
       height: 56px;
-      min-width: 200px;
-      padding: 0 2rem;
-      border-radius: 28px;
+      min-width: 220px;
+      padding: 0 2.5rem;
+      border-radius: 9999px;
       cursor: pointer;
-      box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4);
+      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
       -webkit-tap-highlight-color: transparent;
       user-select: none;
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .share-btn svg {
+    .share-action-btn svg {
       width: 22px;
       height: 22px;
       stroke: #ffffff;
+      stroke-width: 2.2;
       flex-shrink: 0;
     }
 
-    .share-btn:active {
-      transform: scale(0.97);
+    .share-action-btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+    }
+
+    .share-action-btn:active {
+      transform: translateY(0);
     }
 
     .toast {
@@ -212,11 +223,11 @@
     @media (max-width: 768px) {
       body {
         font-size: 1.175rem;
-        padding: 1.25rem 0.75rem calc(6rem + env(safe-area-inset-bottom, 20px)) 0.75rem;
+        padding: 1.25rem 0.75rem 3rem 0.75rem;
       }
 
       .container {
-        padding: 2rem 1.25rem 2.5rem 1.25rem;
+        padding: 2rem 1.25rem 3rem 1.25rem;
         border-radius: 0.85rem;
       }
 
@@ -229,16 +240,16 @@
         margin-bottom: 1.35rem;
       }
 
-      .share-container {
-        margin-top: 2rem;
-        padding-top: 1.75rem;
+      .share-wrapper {
+        margin-top: 2.5rem;
+        padding-top: 2rem;
       }
 
-      .share-btn {
+      .share-action-btn {
         width: 100%;
-        max-width: 300px;
+        max-width: 320px;
         font-size: 1.2rem;
-        height: 52px;
+        height: 54px;
       }
 
       .theme-toggle-btn {
@@ -377,7 +388,7 @@
 
     <p>आपले ‘लँग्वेज-कल्चर’ सर्किट जितके अधिक मजबूत आणि कृतज्ञ असेल तितकी जास्त सकारात्मकता आपण सभोवतालच्या कल्लोळातून ग्रहण करू शकू आणि तितकाच आपला स्वतःचा आवाज इतरांसाठी प्रेरणादायी ठरू शकेल.</p>
 
-    <p>मानसिक स्वास्थ्य साधणे म्हणजे केवळ गोंगाट टाळणे नव्हे; तर आपल्या अस्तित्वाच्या ट्रान्सिव्हरला इतक्या कुशलने ट्यून करण्याची कला आत्मसात करणे आहे की ज्यामुळे एक चांगली व्यक्ती म्हणून self-develop होत असतानाच आपला वैयक्तिक सिग्नल देखील या जगात एक विश्वासार्ह आणि प्रेरणादायी ब्रॉडकास्ट-स्टेशन म्हणून स्थापित होऊ शकेल.</p>
+    <p>मानसिक स्वास्थ्य साधणे म्हणजे केवळ गोंगाट टाळणे नव्हे; तर आपल्या अस्तित्वाच्या ट्रान्सिव्हरला इतक्या कुशलतेने ट्यून करण्याची कला आत्मसात करणे आहे की ज्यामुळे एक चांगली व्यक्ती म्हणून self-develop होत असतानाच आपला वैयक्तिक सिग्नल देखील या जगात एक विश्वासार्ह आणि प्रेरणादायी ब्रॉडकास्ट-स्टेशन म्हणून स्थापित होऊ शकेल.</p>
 
     <div class="center-ornament">✾✾✾</div>
 
@@ -389,9 +400,9 @@
 
     <div class="center-ornament">✾</div>
 
-    <div class="share-container">
-      <button class="share-btn" id="shareBtn" type="button" aria-label="Share">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <div class="share-wrapper">
+      <button class="share-action-btn" id="shareBtn" type="button" aria-label="Share">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="18" cy="5" r="3"></circle>
           <circle cx="6" cy="12" r="3"></circle>
           <circle cx="18" cy="19" r="3"></circle>
