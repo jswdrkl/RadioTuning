@@ -2,7 +2,7 @@
 <html lang="mr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>रेडियो स्टेशनचे ट्यूनिंग आणि मानसिक स्वास्थ्य</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 2.5rem 1rem 6rem 1rem;
+      padding: 2.5rem 1rem 8rem 1rem;
       word-wrap: break-word;
       overflow-wrap: break-word;
       word-break: normal;
@@ -143,12 +143,11 @@
 
     .share-container {
       width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: block;
       margin-top: 3.5rem;
-      padding-top: 2.5rem;
+      padding-top: 2rem;
       border-top: 2px solid var(--border-color);
+      text-align: center;
     }
 
     .share-btn {
@@ -158,32 +157,29 @@
       gap: 0.75rem;
       background-color: var(--accent-color);
       color: #ffffff;
-      border: 2px solid rgba(255, 255, 255, 0.2);
+      border: none;
       font-family: 'Ubuntu', sans-serif;
       font-size: 1.25rem;
       font-weight: 500;
-      min-height: 54px;
-      min-width: 180px;
-      padding: 0.9rem 2.5rem;
-      border-radius: 9999px;
+      height: 56px;
+      min-width: 200px;
+      padding: 0 2rem;
+      border-radius: 28px;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
-      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4);
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     .share-btn svg {
-      display: inline-block;
+      width: 22px;
+      height: 22px;
+      stroke: #ffffff;
       flex-shrink: 0;
     }
 
-    .share-btn:hover {
-      background-color: var(--accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.5);
-    }
-
     .share-btn:active {
-      transform: translateY(0);
+      transform: scale(0.97);
     }
 
     .toast {
@@ -216,11 +212,11 @@
     @media (max-width: 768px) {
       body {
         font-size: 1.175rem;
-        padding: 1.5rem 0.75rem 5rem 0.75rem;
+        padding: 1.25rem 0.75rem calc(6rem + env(safe-area-inset-bottom, 20px)) 0.75rem;
       }
 
       .container {
-        padding: 2rem 1.25rem 3rem 1.25rem;
+        padding: 2rem 1.25rem 2.5rem 1.25rem;
         border-radius: 0.85rem;
       }
 
@@ -234,15 +230,15 @@
       }
 
       .share-container {
-        margin-top: 2.5rem;
-        padding-top: 2rem;
+        margin-top: 2rem;
+        padding-top: 1.75rem;
       }
 
       .share-btn {
         width: 100%;
-        max-width: 280px;
+        max-width: 300px;
         font-size: 1.2rem;
-        padding: 0.85rem 1.75rem;
+        height: 52px;
       }
 
       .theme-toggle-btn {
@@ -381,7 +377,7 @@
 
     <p>आपले ‘लँग्वेज-कल्चर’ सर्किट जितके अधिक मजबूत आणि कृतज्ञ असेल तितकी जास्त सकारात्मकता आपण सभोवतालच्या कल्लोळातून ग्रहण करू शकू आणि तितकाच आपला स्वतःचा आवाज इतरांसाठी प्रेरणादायी ठरू शकेल.</p>
 
-    <p>मानसिक स्वास्थ्य साधणे म्हणजे केवळ गोंगाट टाळणे नव्हे; तर आपल्या अस्तित्वाच्या ट्रान्सिव्हरला इतक्या कुशलतेने ट्यून करण्याची कला आत्मसात करणे आहे की ज्यामुळे एक चांगली व्यक्ती म्हणून self-develop होत असतानाच आपला वैयक्तिक सिग्नल देखील या जगात एक विश्वासार्ह आणि प्रेरणादायी ब्रॉडकास्ट-स्टेशन म्हणून स्थापित होऊ शकेल.</p>
+    <p>मानसिक स्वास्थ्य साधणे म्हणजे केवळ गोंगाट टाळणे नव्हे; तर आपल्या अस्तित्वाच्या ट्रान्सिव्हरला इतक्या कुशलने ट्यून करण्याची कला आत्मसात करणे आहे की ज्यामुळे एक चांगली व्यक्ती म्हणून self-develop होत असतानाच आपला वैयक्तिक सिग्नल देखील या जगात एक विश्वासार्ह आणि प्रेरणादायी ब्रॉडकास्ट-स्टेशन म्हणून स्थापित होऊ शकेल.</p>
 
     <div class="center-ornament">✾✾✾</div>
 
@@ -395,7 +391,7 @@
 
     <div class="share-container">
       <button class="share-btn" id="shareBtn" type="button" aria-label="Share">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="18" cy="5" r="3"></circle>
           <circle cx="6" cy="12" r="3"></circle>
           <circle cx="18" cy="19" r="3"></circle>
@@ -446,16 +442,12 @@
     const shareBtn = document.getElementById('shareBtn');
     const toast = document.getElementById('toast');
 
-    function copyToClipboard() {
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          showToast('Link copied to clipboard!');
-        }).catch(() => {
-          fallbackCopy();
-        });
-      } else {
-        fallbackCopy();
-      }
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
     }
 
     function fallbackCopy() {
@@ -472,12 +464,16 @@
       document.body.removeChild(tempInput);
     }
 
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2500);
+    function copyToClipboard() {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          showToast('Link copied to clipboard!');
+        }).catch(() => {
+          fallbackCopy();
+        });
+      } else {
+        fallbackCopy();
+      }
     }
 
     shareBtn.addEventListener('click', async () => {
